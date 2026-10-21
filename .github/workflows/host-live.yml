@@ -82,8 +82,32 @@ jobs:
           if weather < 1:
               raise SystemExit("weather_hourly is empty — cannot host live Overview")
           PY
-          # Best-effort Open-Meteo refresh; baked warehouse already has hourly rows.
-          python -m climateshield ingest-hourly --once || echo "::warning::ingest-hourly failed; serving committed warehouse"
+          # Refresh only when warehouse weather is stale (>90 min). Keeps host start fast.
+          NEED=$(python - <<'PY'
+          import duckdb, os
+          from datetime import datetime, timezone
+          con = duckdb.connect(os.environ["CLIMATESHIELD_DB"], read_only=True)
+          row = con.execute("select cast(max(timestamp_utc) as varchar) from weather_hourly").fetchone()[0]
+          con.close()
+          if not row:
+              print("yes"); raise SystemExit
+          # DuckDB may return offset timestamps; treat missing parse as refresh.
+          try:
+              ts = datetime.fromisoformat(row.replace("Z", "+00:00"))
+              if ts.tzinfo is None:
+                  ts = ts.replace(tzinfo=timezone.utc)
+              age_min = (datetime.now(timezone.utc) - ts.astimezone(timezone.utc)).total_seconds() / 60.0
+              print("yes" if age_min > 90 else "no")
+              print(f"age_min={age_min:.1f}", flush=True)
+          except Exception:
+              print("yes")
+          PY
+          )
+          if echo "$NEED" | head -n1 | grep -qx yes; then
+            python -m climateshield ingest-hourly --once || echo "::warning::ingest-hourly failed; serving committed warehouse"
+          else
+            echo "Warehouse weather is fresh — skip ingest"
+          fi
 
       - name: Start API + SPA
         env:
