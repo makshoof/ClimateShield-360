@@ -32,10 +32,10 @@ ENV PYTHONUNBUFFERED=1 \
     CLIMATESHIELD_INGEST_STALE_MINUTES=50 \
     CLIMATESHIELD_INGEST_CHECK_SECONDS=180 \
     PYTHONPATH=/app/pipeline \
-    PORT=7860
+    PORT=8000
 
 WORKDIR /app/backend
-# Hugging Face Spaces expects 7860; Render/Railway override with $PORT
-EXPOSE 7860
+# Render/Railway set $PORT; Hugging Face Docker Spaces historically used 7860
+EXPOSE 8000
 
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-7860}"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
