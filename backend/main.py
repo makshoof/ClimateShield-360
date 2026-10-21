@@ -96,7 +96,9 @@ app.add_middleware(
         r"^https://climateshield-360\.onrender\.com$|"
         r"^https://[a-z0-9-]+\.onrender\.com$|"
         r"^https://[a-z0-9-]+\.trycloudflare\.com$|"
-        r"^https://[a-z0-9-]+\.containers\.snapdeploy\.app$"
+        r"^https://[a-z0-9-]+\.containers\.snapdeploy\.app$|"
+        r"^https://[a-z0-9-]+\.hf\.space$|"
+        r"^https://huggingface\.co$"
     ),
     allow_credentials=True,
     allow_methods=["*"],
