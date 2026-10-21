@@ -1,9 +1,0 @@
-{
-  "source_id": "pbs_homepage",
-  "fetch_time_utc": "2026-10-20T20:52:59.298921+00:00",
-  "query": "https://www.pbs.gov.pk/",
-  "licence": "licence_unspecified_official_statistics",
-  "source_url": "https://www.pbs.gov.pk/",
-  "sha256": "51fd4c58beb8b4ffe27e42149725448a8d2a8eb34848c33604339ba19a9196d4",
-  "http_status": 200
-}

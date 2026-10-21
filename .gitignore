@@ -39,9 +39,17 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 dist/
+!frontend/dist/
+!frontend/dist/**
 dist-ssr/
 *.local
 *.tsbuildinfo
+
+# Local / bulky pipeline artifacts (warehouse duckdb is tracked for deploy)
+pipeline/data/raw/
+pipeline/data/cleaned/
+**/*.zip
+_hf_space/
 
 # Environment variables
 .env

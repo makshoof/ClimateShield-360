@@ -1,9 +1,0 @@
-{
-  "source_id": "geofabrik_pakistan_pbf_md5",
-  "fetch_time_utc": "2026-10-19T14:48:10.354846+00:00",
-  "query": "https://download.geofabrik.de/asia/pakistan-latest.osm.pbf.md5",
-  "licence": "ODbL-1.0",
-  "source_url": "https://download.geofabrik.de/asia/pakistan-latest.osm.pbf.md5",
-  "sha256": "623371af193352d79b0c9ed3eda1078fbdb24f927aedb941a9bc935934d7cc66",
-  "http_status": 200
-}

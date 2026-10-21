@@ -120,6 +120,12 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 # --- Core System Endpoints ---
 
+@app.get("/api/live")
+def live() -> dict:
+    """Instant liveness for Render health checks (no DuckDB I/O)."""
+    return {"status": "ok"}
+
+
 @app.get("/api/health", response_model=APIResponse[HealthData])
 def health_check() -> APIResponse[HealthData]:
     """

@@ -1,9 +1,0 @@
-{
-  "source_id": "pmd_ffd_homepage",
-  "fetch_time_utc": "2026-10-20T20:35:43.064346+00:00",
-  "query": "https://ffd.pmd.gov.pk/",
-  "licence": "licence_unspecified_official_publication",
-  "source_url": "https://ffd.pmd.gov.pk/",
-  "sha256": "3657bc0a0688b11681c5216840f065998bbdd31fd0361ced30ec9ea74956c6e9",
-  "http_status": 200
-}

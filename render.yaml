@@ -1,12 +1,11 @@
-# Free Render Blueprint — service URL: https://climateshield-360.onrender.com
-# Deploy: https://dashboard.render.com/blueprints → New Blueprint Instance → this repo
+# Free Render Blueprint — https://climateshield-360.onrender.com
 services:
   - type: web
     name: climateshield-360
     runtime: docker
     plan: free
     region: oregon
-    healthCheckPath: /api/health
+    healthCheckPath: /api/live
     envVars:
       - key: CLIMATESHIELD_DB
         value: /app/pipeline/data/processed/climateshield.duckdb
