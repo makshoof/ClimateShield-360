@@ -94,7 +94,9 @@ app.add_middleware(
     allow_origin_regex=(
         r"^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$|"
         r"^https://climateshield-360\.onrender\.com$|"
-        r"^https://[a-z0-9-]+\.onrender\.com$"
+        r"^https://[a-z0-9-]+\.onrender\.com$|"
+        r"^https://[a-z0-9-]+\.trycloudflare\.com$|"
+        r"^https://[a-z0-9-]+\.containers\.snapdeploy\.app$"
     ),
     allow_credentials=True,
     allow_methods=["*"],
@@ -232,12 +234,16 @@ app.include_router(model_router, prefix="/api")
 app.include_router(planner_router, prefix="/api")
 app.include_router(methodology_router, prefix="/api")
 
-# Production: serve Vite build from the same origin as /api (Render free single service)
+# Production: serve Vite build from the same origin as /api (Render / tunnel hosts)
 _FRONTEND_DIST = Path(__file__).resolve().parent.parent / "frontend" / "dist"
 if _FRONTEND_DIST.is_dir():
     _assets = _FRONTEND_DIST / "assets"
     if _assets.is_dir():
         app.mount("/assets", StaticFiles(directory=str(_assets)), name="assets")
+
+    @app.get("/")
+    def spa_index():
+        return FileResponse(_FRONTEND_DIST / "index.html")
 
     @app.get("/{full_path:path}")
     def spa_fallback(full_path: str):
