@@ -198,8 +198,10 @@ def get_pipeline_status() -> APIResponse[PipelineStatusData]:
             is_latest=True,
         )
 
-    # Determine overall status indicator
-    if not latest_succ_run or (latest_run and latest_run.status == "failed"):
+    # Overall indicator follows last *successful* ingest age.
+    # A newer cycle can fail on optional snapshot connectors (e.g. PBS timeout)
+    # without wiping a recent Open-Meteo success from the status bar.
+    if not latest_succ_run:
         status_indicator = "failed"
     elif is_late:
         status_indicator = "late"

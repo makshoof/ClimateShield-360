@@ -176,7 +176,7 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
           heightDisplay = `Score: ${vuln}`;
         }
 
-        return {
+    return {
           ...f,
           id: f.id ?? index + 1,
           properties: {
@@ -203,14 +203,14 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
   // URL Query Sync for Selected Zone
   const handleSelectZone = useCallback(
     (zoneId: string | null) => {
-      const nextParams = new URLSearchParams(searchParams);
-      if (zoneId) {
-        nextParams.set('zone', zoneId);
-      } else {
-        nextParams.delete('zone');
-        nextParams.delete('zone_id');
-      }
-      setSearchParams(nextParams);
+    const nextParams = new URLSearchParams(searchParams);
+    if (zoneId) {
+      nextParams.set('zone', zoneId);
+    } else {
+      nextParams.delete('zone');
+      nextParams.delete('zone_id');
+    }
+    setSearchParams(nextParams);
     },
     [searchParams, setSearchParams]
   );
@@ -368,45 +368,45 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
 
       targetLayers.forEach((layerId) => {
         map.on('mousemove', layerId, (e) => {
-          if (!e.features || e.features.length === 0) return;
-          map.getCanvas().style.cursor = 'pointer';
-          const feat = e.features[0];
+        if (!e.features || e.features.length === 0) return;
+        map.getCanvas().style.cursor = 'pointer';
+        const feat = e.features[0];
           const props = feat.properties as unknown as ZoneFeatureProperties & {
             calculated_height?: number;
             height_display?: string;
           };
 
-          let intervalArr: [number, number] = [props.interval_low, props.interval_high];
-          if (typeof props.interval === 'string') {
-            try {
-              intervalArr = JSON.parse(props.interval);
-            } catch {
-              intervalArr = [props.interval_low, props.interval_high];
-            }
+        let intervalArr: [number, number] = [props.interval_low, props.interval_high];
+        if (typeof props.interval === 'string') {
+          try {
+            intervalArr = JSON.parse(props.interval);
+          } catch {
+            intervalArr = [props.interval_low, props.interval_high];
           }
+        }
 
-          setHoveredZone({
-            properties: {
-              ...props,
-              interval: intervalArr,
-            },
-            x: e.point.x,
-            y: e.point.y,
-          });
+        setHoveredZone({
+          properties: {
+            ...props,
+            interval: intervalArr,
+          },
+          x: e.point.x,
+          y: e.point.y,
         });
+      });
 
         map.on('mouseleave', layerId, () => {
-          map.getCanvas().style.cursor = '';
-          setHoveredZone(null);
-        });
+        map.getCanvas().style.cursor = '';
+        setHoveredZone(null);
+      });
 
         map.on('click', layerId, (e) => {
-          if (e.features && e.features.length > 0) {
-            const zid = e.features[0].properties?.zone_id;
-            if (zid) {
-              handleSelectZone(zid);
-            }
+        if (e.features && e.features.length > 0) {
+          const zid = e.features[0].properties?.zone_id;
+          if (zid) {
+            handleSelectZone(zid);
           }
+        }
         });
       });
 
@@ -638,8 +638,8 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
 
             {/* Hazard Selector */}
             <div className="p-1 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/15 shadow-xl flex items-center gap-1">
-              <button
-                type="button"
+            <button
+              type="button"
                 onClick={() => setHazardMode('combined')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                   hazardMode === 'combined'
@@ -648,20 +648,20 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                 }`}
               >
                 Combined
-              </button>
-              <button
-                type="button"
-                onClick={() => setHazardMode('rain')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setHazardMode('rain')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                  hazardMode === 'rain'
+                hazardMode === 'rain'
                     ? 'bg-sky-500 text-slate-950 shadow-xs font-bold'
                     : 'text-slate-300 hover:text-white'
-                }`}
-              >
+              }`}
+            >
                 Monsoon Rain
-              </button>
-              <button
-                type="button"
+            </button>
+            <button
+              type="button"
                 onClick={() => setHazardMode('heat')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                   hazardMode === 'heat'
@@ -670,8 +670,8 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                 }`}
               >
                 Heat Wave
-              </button>
-            </div>
+            </button>
+          </div>
 
             {/* Height Shows Metric Selector (Requirement 26 & 39) */}
             <div className="p-1 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/15 shadow-xl flex items-center gap-1.5 px-3 py-1 text-xs">
@@ -694,39 +694,39 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                   info
                 </span>
               </Tooltip>
-            </div>
+          </div>
 
             {/* Severity Filter */}
             <div className="p-1 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/15 shadow-xl flex items-center gap-1 text-xs">
-              <button
-                type="button"
+          <button
+            type="button"
                 onClick={() => setSeverityFilter('all')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-mono-val transition-colors ${
                   severityFilter === 'all' ? 'bg-white/15 text-white font-bold' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 All
-              </button>
-              <button
-                type="button"
+          </button>
+          <button
+            type="button"
                 onClick={() => setSeverityFilter('Severe')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-mono-val transition-colors ${
                   severityFilter === 'Severe' ? 'bg-red-500 text-white font-bold' : 'text-red-400 hover:text-red-300'
                 }`}
               >
                 Severe
-              </button>
-              <button
-                type="button"
+          </button>
+          <button
+            type="button"
                 onClick={() => setSeverityFilter('High')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-mono-val transition-colors ${
                   severityFilter === 'High' ? 'bg-orange-500 text-white font-bold' : 'text-orange-400 hover:text-orange-300'
                 }`}
               >
                 High
-              </button>
-            </div>
-          </div>
+          </button>
+        </div>
+      </div>
 
           {/* Floating Right Navigation Camera Controls (Requirement 32) */}
           <div className="absolute top-4 right-4 z-20 flex flex-col gap-2 pointer-events-auto">
@@ -750,25 +750,25 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
 
             {/* Zoom Controls */}
             <div className="flex flex-col rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/15 overflow-hidden shadow-xl">
-              <button
-                type="button"
-                onClick={handleZoomIn}
+          <button
+            type="button"
+            onClick={handleZoomIn}
                 className="w-10 h-10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
                 title="Zoom in"
                 aria-label="Zoom in"
-              >
-                <span className="material-symbols-outlined text-[20px]">add</span>
-              </button>
+          >
+            <span className="material-symbols-outlined text-[20px]">add</span>
+          </button>
               <div className="h-px bg-white/10 w-full" />
-              <button
-                type="button"
-                onClick={handleZoomOut}
+          <button
+            type="button"
+            onClick={handleZoomOut}
                 className="w-10 h-10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
                 title="Zoom out"
                 aria-label="Zoom out"
-              >
-                <span className="material-symbols-outlined text-[20px]">remove</span>
-              </button>
+          >
+            <span className="material-symbols-outlined text-[20px]">remove</span>
+          </button>
             </div>
 
             {/* Reset North */}
@@ -785,15 +785,15 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
             </button>
 
             {/* Reset View */}
-            <button
-              type="button"
-              onClick={handleResetView}
+          <button
+            type="button"
+            onClick={handleResetView}
               className="w-10 h-10 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/15 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-colors shadow-xl"
               title="Reset to default Karachi view"
               aria-label="Reset view"
             >
               <span className="material-symbols-outlined text-[20px]">home</span>
-            </button>
+          </button>
 
             {/* Idle Camera Drift Toggle */}
             {!shouldReduceMotion && (
@@ -822,7 +822,7 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
             >
               <span className="material-symbols-outlined text-[20px]">fullscreen</span>
             </button>
-          </div>
+                </div>
 
           {/* Floating Glass Legend and Filter Panel (Bottom Left) */}
           <div className="absolute bottom-6 left-4 z-20 max-w-sm w-full pointer-events-auto">
@@ -832,8 +832,8 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                   <span className="material-symbols-outlined text-cyan-400 text-[18px]">palette</span>
                   <span className="font-bold text-white font-display uppercase tracking-wider">
                     Risk Scale Legend
-                  </span>
-                </div>
+                    </span>
+                  </div>
                 <button
                   type="button"
                   onClick={() => setIsLegendExpanded((prev) => !prev)}
@@ -841,9 +841,9 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                 >
                   <span className="material-symbols-outlined text-[18px]">
                     {isLegendExpanded ? 'expand_more' : 'expand_less'}
-                  </span>
+                    </span>
                 </button>
-              </div>
+                  </div>
 
               {isLegendExpanded && (
                 <div className="flex flex-col gap-3 animate-in fade-in duration-150">
@@ -852,36 +852,36 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                     <div className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-full bg-red-500 shrink-0" />
                       <span className="text-slate-200">Severe (Red)</span>
-                    </div>
+                  </div>
                     <div className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-full bg-orange-500 shrink-0" />
                       <span className="text-slate-200">High (Orange)</span>
-                    </div>
+                  </div>
                     <div className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-full bg-amber-500 shrink-0" />
                       <span className="text-slate-200">Moderate (Yellow)</span>
-                    </div>
+                  </div>
                     <div className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-full bg-emerald-500 shrink-0" />
                       <span className="text-slate-200">Low (Green)</span>
-                    </div>
+                </div>
                     <div className="flex items-center gap-2 col-span-2">
                       <span className="w-3 h-3 rounded-full bg-slate-500 shrink-0" />
                       <span className="text-slate-400">Flat Grey (No data / baseline)</span>
-                    </div>
-                  </div>
+              </div>
+            </div>
 
                   {/* Height Legend Line (Requirement 26) */}
                   <div className="p-2 rounded-lg bg-white/5 border border-white/5 font-mono-val text-[11px] text-cyan-300">
                     <strong>Height: </strong>
                     <span>{heightLegendText}</span>
-                  </div>
+              </div>
 
                   {/* Facility Markers Toggles (Requirement 30) */}
                   <div className="flex flex-col gap-1.5 pt-1 border-t border-white/5">
                     <span className="text-[10px] font-mono-val uppercase tracking-wider text-slate-400 font-semibold">
                       Critical Facilities Overlay:
-                    </span>
+                        </span>
                     <div className="flex flex-wrap gap-2 text-[11px]">
                       {(['hospital', 'school', 'shelter', 'power_substation', 'drainage_culvert'] as FacilityType[]).map((type) => {
                         const isEnabled = enabledFacilityTypes[type];
@@ -894,9 +894,9 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                         }[type];
 
                         return (
-                          <button
+                    <button
                             key={type}
-                            type="button"
+                      type="button"
                             onClick={() =>
                               setEnabledFacilityTypes((prev) => ({
                                 ...prev,
@@ -910,35 +910,35 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                             }`}
                           >
                             {label}
-                          </button>
+                    </button>
                         );
                       })}
-                    </div>
+                  </div>
                   </div>
 
                   {/* Download GeoJSON Button */}
                   <div className="pt-2 border-t border-white/5 flex items-center justify-between">
-                    <button
-                      type="button"
+                <button
+                  type="button"
                       onClick={handleExportGeoJSON}
                       className="text-cyan-400 hover:text-cyan-300 text-xs font-semibold flex items-center gap-1 cursor-pointer"
                     >
                       <span className="material-symbols-outlined text-[16px]">download</span>
                       <span>Export District GeoJSON</span>
-                    </button>
+                </button>
                     {tilesOffline && (
                       <span className="text-[10px] text-amber-400">Offline Canvas</span>
                     )}
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
-          </div>
+              )}
+                </div>
+                      </div>
 
           {/* Interactive Floating Glass Hover Tooltip (Requirement 28) */}
           {hoveredZone && (
             <div
-              style={{
+                              style={{
                 left: Math.min(window.innerWidth - 260, Math.max(10, hoveredZone.x + 15)),
                 top: Math.min(window.innerHeight - 180, Math.max(10, hoveredZone.y - 40)),
               }}
@@ -947,40 +947,40 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
               <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-1.5">
                 <span className="font-bold text-white font-display truncate">
                   {hoveredZone.properties.name || hoveredZone.properties.zone_id}
-                </span>
+                            </span>
                 <RiskBadge level={hoveredZone.properties.risk_level} className="scale-90" />
-              </div>
+                          </div>
               <div className="flex flex-col gap-1 font-mono-val text-[11px] text-slate-300">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Probability:</span>
                   <span className="font-bold text-white">
                     {Math.round((hoveredZone.properties.probability || 0) * 100)}%
-                  </span>
-                </div>
+                          </span>
+                        </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">90% CI:</span>
                   <span>
                     [{Math.round((hoveredZone.properties.interval_low || 0) * 100)}%–{Math.round((hoveredZone.properties.interval_high || 0) * 100)}%]
-                  </span>
-                </div>
+                            </span>
+                          </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Exposed Pop:</span>
                   <span className="font-semibold text-slate-200">
                     {hoveredZone.properties.exposed_population ? Number(hoveredZone.properties.exposed_population).toLocaleString() : 'No data'}
-                  </span>
-                </div>
+                          </span>
+                        </div>
                 <div className="flex justify-between text-cyan-300 pt-1 border-t border-white/5">
                   <span className="text-slate-400">Height:</span>
                   <span className="font-bold">{hoveredZone.properties.height_display}</span>
-                </div>
-              </div>
+                      </div>
+                          </div>
               <span className="text-[10px] text-cyan-400/80 italic mt-0.5">
                 Click district to open dossier drawer →
-              </span>
-            </div>
+                            </span>
+                          </div>
           )}
-        </div>
-      )}
+                    </div>
+                  )}
 
       {/* Selected District Dossier Sliding Drawer (Requirement 28) */}
       <Drawer
@@ -993,7 +993,7 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
             <div className="h-14 bg-white/5 rounded-xl skeleton-shimmer" />
             <div className="h-14 bg-white/5 rounded-xl skeleton-shimmer" />
             <div className="h-14 bg-white/5 rounded-xl skeleton-shimmer" />
-          </div>
+                      </div>
         ) : zoneDetail ? (
           <div className="flex flex-col gap-5">
             {/* Top Risk & Hazard Badges */}
@@ -1001,13 +1001,13 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
               <div className="flex flex-col gap-0.5">
                 <span className="text-[10px] font-mono-val uppercase tracking-wider text-slate-400">
                   Compound Assessment
-                </span>
+                          </span>
                 <span className="font-bold text-sm text-white font-display">
                   {zoneDetail.hazard?.hazard_type === 'heavy_rain' ? 'Monsoon Inundation Risk' : 'Extreme Heat Stress'}
-                </span>
-              </div>
+                          </span>
+                        </div>
               <RiskBadge level={zoneDetail.vulnerability?.risk_level || 'Low'} />
-            </div>
+                      </div>
 
             {/* Drawer Tabs */}
             <Tabs
@@ -1029,18 +1029,18 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                     <span className="text-slate-400">Hazard Probability:</span>
                     <span className="font-bold text-cyan-400">
                       {Math.round((zoneDetail.hazard?.probability || 0) * 100)}%
-                    </span>
-                  </div>
+                            </span>
+                          </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">90% Confidence Interval:</span>
                     <span>
                       [{Math.round((zoneDetail.hazard?.interval_low || 0) * 100)}% – {Math.round((zoneDetail.hazard?.interval_high || 0) * 100)}%]
-                    </span>
-                  </div>
+                            </span>
+                          </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">30-Year Baseline Norm:</span>
                     <span>{Math.round((zoneDetail.hazard?.baseline_value || 0) * 100)}%</span>
-                  </div>
+                          </div>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 flex flex-col gap-1 text-xs">
@@ -1049,8 +1049,8 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                     {zoneDetail.vulnerability?.chokepoint_notes || 'High density settlements with unreinforced masonry along critical natural drainage channels.'}
                   </p>
                 </div>
-              </div>
-            )}
+                        </div>
+                      )}
 
             {/* Tab 2: Exposure */}
             {activeTab === 'exposure' && (
@@ -1060,15 +1060,15 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                     <span className="text-[10px] text-slate-400 uppercase">Exposed Population</span>
                     <span className="font-bold text-white text-base mt-1">
                       {zoneDetail.exposure?.exposed_population ? Number(zoneDetail.exposure.exposed_population).toLocaleString() : '—'}
-                    </span>
-                  </div>
+                        </span>
+                          </div>
                   <div className="p-3 rounded-xl bg-slate-900/60 border border-white/5 flex flex-col">
                     <span className="text-[10px] text-slate-400 uppercase">Critical Facilities</span>
                     <span className="font-bold text-cyan-400 text-base mt-1">
                       {zoneDetail.exposure?.facilities_count ?? 0}
-                    </span>
-                  </div>
-                </div>
+                                    </span>
+                                  </div>
+                                </div>
 
                 <div className="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 flex flex-col gap-2 text-xs">
                   <span className="font-bold text-white font-display">Facility Breakdown</span>
@@ -1076,56 +1076,56 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
                     <div className="flex justify-between">
                       <span>Emergency Shelters:</span>
                       <span>{zoneDetail.exposure?.critical_facilities?.filter((f: any) => f.type === 'shelter').length ?? '—'}</span>
-                    </div>
+                              </div>
                     <div className="flex justify-between">
                       <span>Hospitals &amp; Clinics:</span>
                       <span>{zoneDetail.exposure?.critical_facilities?.filter((f: any) => f.type === 'hospital').length ?? '—'}</span>
-                    </div>
+                          </div>
                     <div className="flex justify-between">
                       <span>Schools &amp; Relocation Hubs:</span>
                       <span>{zoneDetail.exposure?.critical_facilities?.filter((f: any) => f.type === 'school').length ?? '—'}</span>
                     </div>
                   </div>
-                </div>
-              </div>
-            )}
+                      </div>
+                    </div>
+                  )}
 
             {/* Tab 3: Vulnerability */}
-            {activeTab === 'vulnerability' && (
+                  {activeTab === 'vulnerability' && (
               <div className="flex flex-col gap-3 animate-in fade-in duration-150">
                 <div className="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 flex flex-col gap-2 font-mono-val text-xs">
                   <div className="flex justify-between">
                     <span className="text-slate-400">Vulnerability Score:</span>
                     <span className="font-bold text-amber-400">{zoneDetail.vulnerability?.vulnerability_score || 0} / 100</span>
-                  </div>
+                      </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Drainage Inundation Index:</span>
                     <span>{zoneDetail.vulnerability?.indicators?.[0]?.indicator || 'Elevated'}</span>
-                  </div>
-                </div>
+                        </div>
+                      </div>
 
                 <p className="text-xs text-slate-400 font-body leading-relaxed p-3 rounded-xl bg-slate-900/40 border border-white/5">
                   Vulnerability indices are calculated from empirical census indicators cross-referenced with KDA infrastructure maps.
-                </p>
-              </div>
-            )}
+                          </p>
+                        </div>
+                      )}
 
             {/* Tab 4: Evidence */}
-            {activeTab === 'evidence' && (
+                  {activeTab === 'evidence' && (
               <div className="flex flex-col gap-3 animate-in fade-in duration-150">
                 <div className="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 flex flex-col gap-2 text-xs">
-                  <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between">
                     <span className="text-slate-400 font-mono-val">Evidence Strength:</span>
                     <Badge tone={zoneDetail.evidence?.evidence_strength === 'high' ? 'ok' : 'warn'}>
                       {zoneDetail.evidence?.evidence_strength?.toUpperCase() || 'MEDIUM'} EVIDENCE
                     </Badge>
-                  </div>
+                      </div>
                   <div className="flex items-center justify-between font-mono-val pt-1 border-t border-white/5">
                     <span className="text-slate-400">Warehouse Table:</span>
                     <span className="text-slate-200">exposure_index</span>
-                  </div>
-                </div>
-              </div>
+                        </div>
+                        </div>
+                        </div>
             )}
 
             {/* Action Footer */}
@@ -1136,8 +1136,8 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
               <Button variant="primary" onClick={handleExportGeoJSON}>
                 Export Feature
               </Button>
-            </div>
-          </div>
+                              </div>
+                              </div>
         ) : (
           <EmptyState
             title="District Dossier Empty"
@@ -1145,7 +1145,7 @@ export const RiskMap: React.FC<RiskMapProps> = () => {
           />
         )}
       </Drawer>
-    </div>
+            </div>
   );
 };
 

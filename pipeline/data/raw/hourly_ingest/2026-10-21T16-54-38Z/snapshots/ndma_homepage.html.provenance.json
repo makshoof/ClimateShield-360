@@ -1,0 +1,9 @@
+{
+  "source_id": "ndma_homepage",
+  "fetch_time_utc": "2026-10-21T16:55:01.230896+00:00",
+  "query": "https://ndma.gov.pk/",
+  "licence": "licence_unspecified_official_publication",
+  "source_url": "https://ndma.gov.pk/",
+  "sha256": "ff503e6bbda04243e9b0e5681649b5d913b0f0484aa0786a15867c32272a136a",
+  "http_status": 200
+}

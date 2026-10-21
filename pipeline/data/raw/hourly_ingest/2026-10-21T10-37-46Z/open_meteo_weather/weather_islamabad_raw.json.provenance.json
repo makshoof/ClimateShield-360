@@ -1,0 +1,8 @@
+{
+  "source_id": "open_meteo_weather",
+  "fetch_time_utc": "2026-10-21T10:37:46.704221+00:00",
+  "query": "https://api.open-meteo.com/v1/forecast?latitude=33.63796&longitude=73.0273&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cprecipitation%2Crain%2Csurface_pressure%2Csoil_moisture_0_to_7cm%2Csoil_moisture_7_to_28cm%2Cwind_speed_10m%2Cwind_direction_10m%2Ccloud_cover%2Cweather_code&timezone=GMT&past_days=2&forecast_days=7",
+  "licence": "CC-BY-4.0",
+  "source_url": "https://open-meteo.com/",
+  "sha256": "123a19e84db5450c3d08272d799949b8b0d5d0231977cc2ccd9978c04c08e3c5"
+}

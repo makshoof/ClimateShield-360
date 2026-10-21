@@ -98,7 +98,24 @@ def restore_contract_tables(con: duckdb.DuckDBPyConnection) -> dict[str, int]:
                 started = pd.to_datetime(group["fetch_time_utc"], utc=True).min().to_pydatetime()
                 finished = pd.to_datetime(group["fetch_time_utc"], utc=True).max().to_pydatetime()
                 statuses = {str(value).lower() for value in group["status"].fillna("")}
-                status = "failed" if statuses & {"failed", "error"} else "success"
+                # Live weather is the hourly contract. Snapshot sites (PBS/NDMA/…)
+                # may time out without failing the whole pipeline run.
+                critical = (
+                    group[group["source_id"].astype(str) == "open_meteo_weather"]
+                    if "source_id" in group.columns
+                    else group.iloc[0:0]
+                )
+                if not critical.empty:
+                    crit_statuses = {
+                        str(value).lower() for value in critical["status"].fillna("")
+                    }
+                    status = (
+                        "failed"
+                        if crit_statuses & {"failed", "error"}
+                        else "success"
+                    )
+                else:
+                    status = "failed" if statuses & {"failed", "error"} else "success"
                 notes = (
                     "Loaded from hourly_ingest_log.csv after warehouse rebuild. "
                     f"connectors={len(group)}; statuses={', '.join(sorted(statuses))}."

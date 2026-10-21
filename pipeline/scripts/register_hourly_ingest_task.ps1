@@ -1,6 +1,6 @@
 # Register an hourly ClimateShield ingest task. Run in an elevated PowerShell if needed.
 # This does not start a dashboard.
-$repo = '/home/hunain/Projects/climateshield-360/pipeline'
+$repo = 'C:\Users\Code\Desktop\climateshield-360\pipeline'
 $py = (Get-Command python).Source
 $action = "$py -m climateshield ingest-hourly --once"
 Set-Location $repo

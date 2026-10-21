@@ -287,6 +287,9 @@ def _snapshot_result(
             )
         notes = f"{notes} robots: {robot_note}"
     response = fetch_url(url, limiter=limiter)
+    # Snapshot pages are change-detection only. Timeouts become "unavailable"
+    # so they do not mark the whole hourly run as failed in run_status.
+    ok = response.status == 200 and bool(response.body)
     result = ConnectorResult(
         source_id=source_id,
         publisher=publisher,
@@ -297,12 +300,12 @@ def _snapshot_result(
         publication_frequency=publication_frequency,
         live_observations=False,
         fetch_time_utc=fetch_time.isoformat(),
-        status="success" if response.status == 200 and response.body else "failed",
-        error="" if response.status == 200 and response.body else (response.error or f"HTTP {response.status}"),
+        status="success" if ok else "unavailable",
+        error="" if ok else (response.error or f"HTTP {response.status}"),
         notes=notes,
         http_status=response.status,
         sha256=sha256_bytes(response.body) if response.body else "",
-        n_records_fetched=1 if response.status == 200 and response.body else 0,
+        n_records_fetched=1 if ok else 0,
     )
     return result, response, response.body or b""
 

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#ffffff","surface-container":"#eceef0","surface-container-highest":"#e0e3e5","on-tertiary-fixed-variant":"#6e3900","on-primary-container":"#7991af","on-tertiary":"#ffffff","secondary":"#006398","tertiary-fixed-dim":"#ffb77d","on-tertiary-container":"#d77503","surface-variant":"#e0e3e5","surface-tint":"#49607c","background":"#f7f9fb","on-surface":"#191c1e","tertiary-container":"#401f00","surface-dim":"#d8dadc","on-error-container":"#93000a","inverse-on-surface":"#eff1f3","surface":"#f7f9fb","primary-container":"#0f2942","surface-bright":"#f7f9fb","inverse-primary":"#b0c9e8","on-primary-fixed-variant":"#314863","secondary-fixed-dim":"#93ccff","on-error":"#ffffff","secondary-fixed":"#cce5ff","surface-container-low":"#f2f4f6","inverse-surface":"#2d3133","outline":"#74777e","on-secondary-fixed-variant":"#004b73","on-secondary-fixed":"#001d31","on-primary-fixed":"#011d35","error-container":"#ffdad6","surface-container-lowest":"#ffffff","on-surface-variant":"#43474d","on-background":"#191c1e","tertiary":"#220e00","outline-variant":"#c3c6ce","primary":"#001428","on-tertiary-fixed":"#2f1500","primary-fixed-dim":"#b0c9e8","primary-fixed":"#d1e4ff","secondary-container":"#5bb8fe","error":"#ba1a1a","surface-container-high":"#e6e8ea","tertiary-fixed":"#ffdcc3","on-primary":"#ffffff","on-secondary-container":"#00476e"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-lg":"1.5rem","space-xs":"0.25rem","space-xl":"2rem","gutter-desktop":"1.5rem","space-md":"1rem","margin":"1rem","gutter":"1rem","space-sm":"0.5rem","margin-desktop":"2rem"},"fontFamily":{"label-mono-md":["JetBrains Mono"],"headline-xl-mobile":["Inter"],"metric-display":["Inter"],"headline-lg":["Inter"],"headline-xl":["Inter"],"title-md":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"headline-md":["Inter"],"body-md":["Inter"],"label-mono-sm":["JetBrains Mono"]},"fontSize":{"label-mono-md":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"metric-display":["40px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg-mobile":["22px",{"lineHeight":"30px","letterSpacing":"0em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.005em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"label-mono-sm":["11px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[260px] bg-primary-container text-on-primary z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm bg-primary"><img alt="ClimateShield 360 Official Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UUEiJoS5TyQdPFUAHDEsKGHY3p3oxrPFUPyag65p-od58W6cQV5OKfknvKRLG_UQydJr18TpHGhfPAjL6iO2fGxdywKP17XOheCKifGJE7uX48Qz3lb5aVnVgzhOimKagshwwFhUHV_vfPNHN0m5pVm_GmuEjKhOFZcz2yGc0ovgnoG1WaBBS3Mf3VVHmBO31GkNx6unB7d--gdd9N9za6I9Cw4du83RMr1xq1NocnLBoHa0f0r9KwH_c"/><div class="flex flex-col min-w-0"><span class="font-title-md text-title-md text-on-primary truncate tracking-tight">ClimateShield 360</span><span class="font-label-mono-sm text-label-mono-sm text-on-primary-container truncate">SINDH PDMA / KMC</span></div></div><div class="px-space-md py-space-sm"><div class="font-label-mono-sm text-label-mono-sm text-on-primary-container uppercase tracking-wider mb-space-xs">Operational Console</div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-secondary text-on-secondary font-bold rounded-lg"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 transition-colors bg-secondary text-on-secondary font-bold rounded-lg" data-path="overview" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-body-md text-body-md">Overview</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container hover:bg-primary hover:text-on-primary transition-colors" data-path="risk-map" href="#"><span class="material-symbols-outlined text-[20px]">radar</span><span class="font-body-md text-body-md">Risk Map</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container hover:bg-primary hover:text-on-primary transition-colors" data-path="eight-impacts" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-md text-body-md">Eight Impacts</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container hover:bg-primary hover:text-on-primary transition-colors" data-path="insight-agent" href="#"><span class="material-symbols-outlined text-[20px]">auto_awesome</span><span class="font-body-md text-body-md">Insight Agent</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container hover:bg-primary hover:text-on-primary transition-colors" data-path="data-quality" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span class="font-body-md text-body-md">Data Quality</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container hover:bg-primary hover:text-on-primary transition-colors" data-path="pipeline-freshness" href="#"><span class="material-symbols-outlined text-[20px]">history_toggle_off</span><span class="font-body-md text-body-md">Pipeline &amp; Freshness</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-primary-container hover:bg-primary hover:text-on-primary transition-colors" data-path="about-limits" href="#"><span class="material-symbols-outlined text-[20px]">info</span><span class="font-body-md text-body-md">About &amp; Limits</span></a></nav></div></div><div class="p-space-md flex flex-col gap-space-sm bg-primary"><div class="bg-error/20 p-space-sm rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-error text-[20px]">emergency</span><div class="flex flex-col min-w-0"><span class="font-label-mono-sm text-label-mono-sm text-on-primary font-bold uppercase">Emergency Hotline</span><span class="font-label-mono-sm text-label-mono-sm text-on-primary">PDMA: 1736 | 1122</span></div></div><div class="flex items-center gap-space-sm p-space-xs"><div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-secondary text-[18px]">person</span></div><div class="flex flex-col min-w-0"><span class="font-body-sm text-body-sm text-on-primary font-semibold truncate">Engr. Tariq Khan</span><span class="font-label-mono-sm text-label-mono-sm text-on-primary-container truncate">Karachi East Cell</span></div></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 z-40 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><img alt="ClimateShield 360 Official Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UUEiJoS5TyQdPFUAHDEsKGHY3p3oxrPFUPyag65p-od58W6cQV5OKfknvKRLG_UQydJr18TpHGhfPAjL6iO2fGxdywKP17XOheCKifGJE7uX48Qz3lb5aVnVgzhOimKagshwwFhUHV_vfPNHN0m5pVm_GmuEjKhOFZcz2yGc0ovgnoG1WaBBS3Mf3VVHmBO31GkNx6unB7d--gdd9N9za6I9Cw4du83RMr1xq1NocnLBoHa0f0r9KwH_c"/><div class="hidden xl:flex flex-col min-w-0"><span class="font-title-md text-title-md text-on-surface truncate">ClimateShield 360</span><span class="font-body-sm text-body-sm text-on-surface-variant truncate">Karachi Disaster Management &amp; Early Warning System (PDMA Sindh / KMC Cell)</span></div><div class="flex items-center bg-surface-container-high rounded-full p-0.5"><button class="px-space-sm py-1 rounded-full font-label-mono-sm text-label-mono-sm bg-primary text-on-primary font-semibold shadow-sm" type="button">Next 24h</button><button class="px-space-sm py-1 rounded-full font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface" type="button">48h</button><button class="px-space-sm py-1 rounded-full font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface" type="button">7 days</button></div><div class="relative"><button class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm" type="button"><span class="material-symbols-outlined text-[18px] text-secondary">location_on</span><span>All Karachi Zones (18 Towns / Cantt)</span><span class="material-symbols-outlined text-[18px]">arrow_drop_down</span></button></div></div><div class="flex items-center gap-space-md shrink-0"><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-low"><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface">Last run: 14:02 PKT (18m ago) · Status: OK</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-secondary-fixed text-on-secondary-fixed"><span class="material-symbols-outlined text-[16px]">thermostat</span><span class="font-label-mono-sm text-label-mono-sm">Karachi Port: 36.4°C · RH: 71% · Wind: 18 kt SW</span></div><button class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm" title="Switch to Urdu (RTL)" type="button"><span class="material-symbols-outlined text-[18px]">translate</span><span class="font-label-mono-sm text-label-mono-sm font-semibold">English | اردو</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 pb-12 bg-surface min-h-[calc(100vh-48px)]"><div class="flex flex-col w-full">
+<div class="px-space-md lg:px-space-lg py-space-md flex flex-col gap-space-lg max-w-[1720px] mx-auto w-full">
+<!-- Operational Notice Banner -->
+<div class="bg-surface-container-high rounded-lg p-space-sm sm:px-space-md flex flex-wrap items-center justify-between gap-space-sm shadow-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0">info</span>
+<div class="flex flex-wrap items-center gap-x-space-sm gap-y-0.5">
+<span class="font-label-mono-sm text-label-mono-sm font-semibold uppercase text-secondary tracking-wider">Operational Simulation Mode:</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate sm:overflow-visible">All numeric figures tagged with</span>
+<span class="font-label-mono-sm text-label-mono-sm px-1.5 py-0.5 rounded bg-surface-container-lowest text-on-surface-variant uppercase">[Sample Data]</span>
+<span class="hidden md:inline font-body-sm text-body-sm text-on-surface-variant">Forecast engine: Ensemble NWP-WRF v4.2 + Karachi Urban Runoff (KURM).</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs font-label-mono-sm text-label-mono-sm text-on-surface-variant shrink-0">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span>PDMA-SYNDICATE READY</span>
+</div>
+</div>
+<!-- 4 Key Metric Telemetry Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1: Heat Hazard -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Hazard Vector 01</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-mono-sm text-label-mono-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+              High (Orange)
+            </span>
+</div>
+<div class="mt-space-sm">
+<span class="font-title-md text-title-md text-on-surface block">Thermal Hazard Level</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-metric-display text-metric-display text-on-surface tracking-tight">43.8°C</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Feels Like (WBGT)</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">Confidence Band (90%)</span>
+<span class="font-semibold text-on-surface">41.5°C — 46.2°C</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full relative overflow-hidden">
+<div class="absolute left-[38%] right-[22%] h-full bg-on-tertiary-container rounded-full"></div>
+<div class="absolute left-[62%] top-0 bottom-0 w-1 bg-tertiary"></div>
+</div>
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-on-surface-variant mt-0.5">
+<span class="truncate">PMD Karachi Met &amp; GFS 0.25°</span>
+<span class="px-1 py-0.2 bg-surface-container text-on-surface-variant rounded text-[10px] uppercase">[Sample Data]</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Rainfall Hazard -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Hazard Vector 02</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-mono-sm text-label-mono-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">water_drop</span>
+              Moderate (Yellow)
+            </span>
+</div>
+<div class="mt-space-sm">
+<span class="font-title-md text-title-md text-on-surface block">Precipitation Accumulation</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-metric-display text-metric-display text-on-surface tracking-tight">38</span>
+<span class="font-title-md text-title-md text-on-surface font-normal">mm</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ 24h</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">Ensemble Spread: Wide</span>
+<span class="font-semibold text-on-surface">15mm — 65mm</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full relative overflow-hidden">
+<div class="absolute left-[15%] right-[28%] h-full bg-secondary rounded-full"></div>
+<div class="absolute left-[45%] top-0 bottom-0 w-1 bg-primary"></div>
+</div>
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-on-surface-variant mt-0.5">
+<span class="truncate">PMD Radar (Badin) + ECMWF</span>
+<span class="px-1 py-0.2 bg-surface-container text-on-surface-variant rounded text-[10px] uppercase">[Sample Data]</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Zones at Severe Risk -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Vulnerability Status</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-mono-sm text-label-mono-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">crisis_alert</span>
+              4 Critical
+            </span>
+</div>
+<div class="mt-space-sm">
+<span class="font-title-md text-title-md text-on-surface block">Zones Exceeding Threshold</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-metric-display text-metric-display text-on-surface tracking-tight">4</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant font-normal">/ 18</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Towns &amp; Cantts</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">Distress Hotspots</span>
+<span class="font-semibold text-error">Lyari, Malir, Korangi</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Compound runoff &amp; urban heat trapping</p>
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-on-surface-variant mt-0.5">
+<span class="truncate">Composite Index (NDMA 2023)</span>
+<span class="px-1 py-0.2 bg-surface-container text-on-surface-variant rounded text-[10px] uppercase">[Sample Data]</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Data Freshness Status -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Pipeline Health</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-[14px]">check_circle</span>
+              Nominal
+            </span>
+</div>
+<div class="mt-space-sm">
+<span class="font-title-md text-title-md text-on-surface block">Ingestion Integrity</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-metric-display text-metric-display text-on-surface tracking-tight">98.4%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">14/15 feeds OK</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">Lagging Source</span>
+<span class="font-semibold text-on-tertiary-container truncate max-w-[130px]">K-Electric (+32m)</span>
+</div>
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-on-surface-variant">
+<span>Cycle: 14:02 PKT</span>
+<span class="text-secondary font-semibold">T-18m ago</span>
+</div>
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-on-surface-variant mt-0.5">
+<span class="truncate">Sindh Gateway Node 04</span>
+<span class="px-1 py-0.2 bg-surface-container text-on-surface-variant rounded text-[10px] uppercase">Telemetry</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Operational Workspace Grid (70% Visualizer / 30% Decision Support) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column (8 of 12 cols = ~67-70%) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Interactive Hazard Distribution Map Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Map Header & Controls -->
+<div class="p-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-md bg-surface-container-low">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">radar</span>
+<span class="font-title-md text-title-md text-on-surface truncate">Karachi Division Urban Hazard Distribution</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Projections: T+0h to T+24h | High Spatial Resolution (~500m Grid)</span>
+</div>
+<!-- Hazard Mode Switcher -->
+<div class="flex items-center bg-surface-container-highest p-1 rounded-lg shrink-0">
+<button class="px-3 py-1 rounded font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface" type="button">Heat</button>
+<button class="px-3 py-1 rounded font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface" type="button">Rain</button>
+<button class="px-3 py-1 rounded font-label-mono-sm text-label-mono-sm bg-primary text-on-primary font-semibold shadow-sm" type="button">Combined (Active)</button>
+</div>
+</div>
+<!-- Infrastructure Overlays Sub-bar -->
+<div class="px-space-md py-2 bg-surface-container flex flex-wrap items-center justify-between gap-space-sm text-on-surface font-label-mono-sm text-label-mono-sm">
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1">
+<span class="text-on-surface-variant font-semibold">Overlays:</span>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input checked="" class="rounded text-secondary focus:ring-0" type="checkbox"/>
+<span>Hospitals &amp; Trauma (42)</span>
+</label>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input checked="" class="rounded text-secondary focus:ring-0" type="checkbox"/>
+<span>Relief Shelters (68)</span>
+</label>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input checked="" class="rounded text-secondary focus:ring-0" type="checkbox"/>
+<span>Drainage &amp; Nullahs</span>
+</label>
+<label class="inline-flex items-center gap-1.5 cursor-pointer">
+<input class="rounded text-secondary focus:ring-0" type="checkbox"/>
+<span>KE Substations (38)</span>
+</label>
+</div>
+<span class="text-on-surface-variant uppercase">Grid: Lat 24.86° N / Lon 67.00° E</span>
+</div>
+<!-- Map Representation Canvas -->
+<div class="relative w-full h-[460px] bg-[#0c1f33] overflow-hidden select-none">
+<!-- Map Stylized Vector Surface (Inline SVG) -->
+<svg class="w-full h-full object-cover" fill="none" viewbox="0 0 900 480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="8" id="stipple-pattern" patternunits="userSpaceOnUse" width="8">
+<circle cx="2" cy="2" fill="#cbd5e1" fill-opacity="0.25" r="1"></circle>
+<circle cx="6" cy="6" fill="#cbd5e1" fill-opacity="0.25" r="1"></circle>
+</pattern>
+<lineargradient gradientunits="userSpaceOnUse" id="arabian-sea" x1="0" x2="900" y1="480" y2="480">
+<stop offset="0%" stop-color="#051424"></stop>
+<stop offset="100%" stop-color="#092038"></stop>
+</lineargradient>
+<filter height="140%" id="glow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<!-- Arabian Sea / Water Body -->
+<rect fill="url(#arabian-sea)" height="480" width="900"></rect>
+<!-- Subtle Sea Wave Marks -->
+<path d="M 40 420 Q 90 410 140 420 T 240 420" stroke="#1e3a5f" stroke-dasharray="4 6" stroke-width="1.5"></path>
+<path d="M 120 450 Q 180 440 240 450 T 360 450" stroke="#1e3a5f" stroke-dasharray="4 6" stroke-width="1.5"></path>
+<text fill="#476d99" font-family="JetBrains Mono" font-size="12" letter-spacing="3" x="70" y="460">ARABIAN SEA (MANORA CHANNEL)</text>
+<!-- Land Boundaries: Karachi Metropolitan Area -->
+<!-- Gadap Town (North - Green/Moderate stipple) -->
+<path d="M 280 20 L 580 15 L 720 70 L 640 170 L 420 160 L 290 90 Z" fill="#1b4d3e" fill-opacity="0.5" stroke="#2a6b57" stroke-width="1.5"></path>
+<text fill="#a7f3d0" font-family="JetBrains Mono" font-size="11" font-weight="600" x="480" y="85">GADAP TOWN (MODERATE)</text>
+<!-- Gulshan-e-Iqbal & Gulberg (Mid-East - Yellow/Moderate) -->
+<path d="M 420 160 L 640 170 L 670 250 L 490 260 L 410 210 Z" fill="#d77503" fill-opacity="0.35" stroke="#f59e0b" stroke-width="1.5"></path>
+<text fill="#fef08a" font-family="JetBrains Mono" font-size="11" font-weight="600" x="490" y="215">GULSHAN / CENTRAL</text>
+<!-- Malir & Bin Qasim (East - Orange/High) -->
+<path d="M 640 170 L 880 150 L 870 340 L 670 330 L 670 250 Z" fill="#b45309" fill-opacity="0.6" stroke="#f59e0b" stroke-width="1.5"></path>
+<text fill="#fde68a" font-family="JetBrains Mono" font-size="11" font-weight="600" x="720" y="240">MALIR DISTRICT</text>
+<!-- Orangi Town & Baldia (North-West - High Risk / Stippling) -->
+<path d="M 190 100 L 290 90 L 410 160 L 350 230 L 190 200 Z" fill="#b91c1c" fill-opacity="0.55" stroke="#ef4444" stroke-width="1.5"></path>
+<rect clip-path="url(#orangi-clip)" fill="url(#stipple-pattern)" height="140" width="220" x="190" y="90"></rect>
+<text fill="#fca5a5" font-family="JetBrains Mono" font-size="11" font-weight="600" x="210" y="160">ORANGI / SITE</text>
+<!-- Lyari Town (Central Dense - Severe Red ALERT) -->
+<path d="M 230 220 L 350 230 L 360 295 L 250 290 Z" fill="#991b1b" fill-opacity="0.85" stroke="#f87171" stroke-width="2"></path>
+<text fill="#ffffff" font-family="JetBrains Mono" font-size="12" font-weight="bold" x="260" y="260">LYARI (CRITICAL)</text>
+<!-- Kemari & Port Zone (South-West Coastal - Red/Orange) -->
+<path d="M 120 220 L 230 220 L 250 290 L 220 370 L 90 320 Z" fill="#991b1b" fill-opacity="0.75" stroke="#ef4444" stroke-width="2"></path>
+<text fill="#fecaca" font-family="JetBrains Mono" font-size="11" font-weight="600" x="130" y="295">KEMARI / PORT</text>
+<!-- Saddar & Civil Lines (Urban Core - Yellow/Moderate) -->
+<path d="M 350 230 L 490 260 L 470 320 L 360 295 Z" fill="#d77503" fill-opacity="0.45" stroke="#f59e0b" stroke-width="1.5"></path>
+<text fill="#fef3c7" font-family="JetBrains Mono" font-size="11" font-weight="600" x="380" y="280">SADDAR</text>
+<!-- Korangi Industrial & Creek (South-East - Severe Compound) -->
+<path d="M 490 260 L 670 250 L 670 360 L 480 370 Z" fill="#b91c1c" fill-opacity="0.7" stroke="#ef4444" stroke-width="2"></path>
+<text fill="#fee2e2" font-family="JetBrains Mono" font-size="11" font-weight="600" x="520" y="315">KORANGI (FLOOD PRONE)</text>
+<!-- Clifton & DHA (Southern Coastline - Low Risk Green/Muted) -->
+<path d="M 250 290 L 470 320 L 480 370 L 220 370 Z" fill="#065f46" fill-opacity="0.5" stroke="#10b981" stroke-width="1.5"></path>
+<text fill="#a7f3d0" font-family="JetBrains Mono" font-size="11" font-weight="600" x="300" y="345">CLIFTON / DHA</text>
+<!-- Major Storm Drains / Nullahs -->
+<!-- Gujjar Nullah -->
+<path d="M 390 120 Q 380 180 340 225" stroke="#38bdf8" stroke-dasharray="3 3" stroke-width="2.5"></path>
+<text fill="#38bdf8" font-family="JetBrains Mono" font-size="9" x="310" y="140">Gujjar Nullah</text>
+<!-- Orangi Nullah -->
+<path d="M 260 140 Q 275 190 295 235" stroke="#38bdf8" stroke-dasharray="3 3" stroke-width="2"></path>
+<text fill="#38bdf8" font-family="JetBrains Mono" font-size="9" x="210" y="190">Orangi Nullah</text>
+<!-- Malir River Channel -->
+<path d="M 680 190 Q 610 270 540 370" stroke="#38bdf8" stroke-width="3"></path>
+<text fill="#38bdf8" font-family="JetBrains Mono" font-size="9" x="610" y="310">Malir River Basin</text>
+<!-- Critical Facilities Icons (Hospital & Shelters) -->
+<!-- Civil Hospital Karachi -->
+<g transform="translate(365, 260)">
+<circle cx="6" cy="6" fill="#dc2626" r="7"></circle>
+<path d="M 6 3 L 6 9 M 3 6 L 9 6" stroke="#ffffff" stroke-width="1.8"></path>
+</g>
+<!-- JPMC -->
+<g transform="translate(450, 275)">
+<circle cx="6" cy="6" fill="#dc2626" r="7"></circle>
+<path d="M 6 3 L 6 9 M 3 6 L 9 6" stroke="#ffffff" stroke-width="1.8"></path>
+</g>
+<!-- Abbasi Shaheed Hospital -->
+<g transform="translate(420, 185)">
+<circle cx="6" cy="6" fill="#dc2626" r="7"></circle>
+<path d="M 6 3 L 6 9 M 3 6 L 9 6" stroke="#ffffff" stroke-width="1.8"></path>
+</g>
+<!-- Shelter Symbols -->
+<g transform="translate(290, 245)">
+<rect fill="#0284c7" height="12" rx="2" width="12" x="0" y="0"></rect>
+<path d="M 2 8 L 6 3 L 10 8 Z" fill="#ffffff"></path>
+</g>
+<g transform="translate(540, 280)">
+<rect fill="#0284c7" height="12" rx="2" width="12" x="0" y="0"></rect>
+<path d="M 2 8 L 6 3 L 10 8 Z" fill="#ffffff"></path>
+</g>
+</svg>
+<!-- Map Floating Interactive Tooltip Inspection Box -->
+<div class="absolute top-4 left-4 bg-primary-container/95 backdrop-blur text-on-primary rounded-xl p-space-sm max-w-xs shadow-xl pointer-events-none">
+<div class="flex items-center justify-between gap-space-sm">
+<span class="font-label-mono-sm text-label-mono-sm uppercase text-secondary-container">Zone Inspector</span>
+<span class="px-1.5 py-0.5 rounded bg-error font-label-mono-sm text-[10px] text-on-error font-bold">SEVERE ALERT</span>
+</div>
+<div class="font-title-md text-title-md text-on-primary mt-1">Lyari Sub-Division</div>
+<div class="mt-2 space-y-1 font-label-mono-sm text-label-mono-sm">
+<div class="flex justify-between text-on-primary-container">
+<span>Surface Heat Index:</span>
+<span class="text-on-primary font-bold">45.2°C [High]</span>
+</div>
+<div class="flex justify-between text-on-primary-container">
+<span>Runoff Risk (Rain):</span>
+<span class="text-on-primary font-bold">48mm/hr (Critical)</span>
+</div>
+<div class="flex justify-between text-on-primary-container">
+<span>Est. Pop at Risk:</span>
+<span class="text-on-primary font-bold">640,000 residents</span>
+</div>
+</div>
+</div>
+<!-- Compass & Scale Bar Bottom Right -->
+<div class="absolute bottom-4 right-4 bg-primary-container/90 backdrop-blur text-on-primary rounded-lg px-space-sm py-1 font-label-mono-sm text-label-mono-sm flex items-center gap-space-sm">
+<div class="flex items-center gap-1">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span>N ↑</span>
+</div>
+<span class="text-on-primary-container">|</span>
+<span>10 km</span>
+<span class="w-8 h-1 bg-on-primary inline-block"></span>
+</div>
+</div>
+<!-- Color & Pattern Legend Footer -->
+<div class="p-space-md bg-surface-container flex flex-wrap items-center justify-between gap-space-sm text-on-surface font-label-mono-sm text-label-mono-sm">
+<div class="flex flex-wrap items-center gap-space-md">
+<span class="text-on-surface-variant font-semibold">Classification:</span>
+<div class="flex items-center gap-1.5">
+<span class="w-3.5 h-3.5 rounded bg-[#065f46]"></span>
+<span>Low (&lt;38°C / &lt;10mm)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3.5 h-3.5 rounded bg-[#d77503]"></span>
+<span>Moderate Watch</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3.5 h-3.5 rounded bg-[#b45309]"></span>
+<span>High Warning</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3.5 h-3.5 rounded bg-[#991b1b]"></span>
+<span>Severe Red Alert</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3.5 h-3.5 rounded bg-surface-container-highest flex items-center justify-center font-bold text-[10px]">░</span>
+<span>Stippling = High Model Variance</span>
+</div>
+</div>
+<div class="text-on-surface-variant">KMC GIS Registry Rev 8.1</div>
+</div>
+</div>
+<!-- 48-Hour Composite Hazard Curve & Uncertainty Timeline Strip -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">show_chart</span>
+<span class="font-title-md text-title-md text-on-surface">48-Hour Composite Hazard Probability &amp; Uncertainty Timeline</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Ensemble NWP vs 30-Year Climatological Average (Karachi Airport WMO 41780)</span>
+</div>
+<!-- Legend markers -->
+<div class="flex flex-wrap items-center gap-space-md font-label-mono-sm text-label-mono-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-0.5 bg-secondary"></span>
+<span class="text-on-surface font-medium">Model Curve</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-2 bg-secondary/20 rounded-sm"></span>
+<span>90% Confidence Interval</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-0.5 bg-outline border-dashed"></span>
+<span>Climatology Norm</span>
+</div>
+</div>
+</div>
+<!-- SVG Chart Area -->
+<div class="relative w-full h-56 bg-surface-container-low rounded-lg p-2 select-none overflow-hidden">
+<svg class="w-full h-full overflow-visible" fill="none" preserveaspectratio="none" viewbox="0 0 800 200">
+<!-- Grid lines -->
+<line stroke="#e2e8f0" stroke-dasharray="4 4" x1="0" x2="800" y1="40" y2="40"></line>
+<line stroke="#e2e8f0" stroke-dasharray="4 4" x1="0" x2="800" y1="90" y2="90"></line>
+<line stroke="#e2e8f0" stroke-dasharray="4 4" x1="0" x2="800" y1="140" y2="140"></line>
+<!-- Y-Axis Threshold Level Line (High Hazard Alert at Y=60) -->
+<line stroke="#ba1a1a" stroke-dasharray="6 4" stroke-opacity="0.6" stroke-width="1.5" x1="0" x2="800" y1="65" y2="65"></line>
+<text fill="#ba1a1a" font-family="JetBrains Mono" font-size="10" font-weight="600" x="8" y="60">CRITICAL RISK THRESHOLD (COMPOSITE INDEX 75)</text>
+<!-- Climatological baseline line (dashed gray) -->
+<path d="M 0 135 C 100 130, 200 120, 300 125 C 400 130, 500 128, 600 120 C 700 115, 800 125, 800 125" fill="none" stroke="#74777e" stroke-dasharray="5 5" stroke-width="2"></path>
+<!-- Uncertainty Shaded Band (widening towards T+36h to T+48h) -->
+<!-- Top bound: (0, 110) -> (300, 30) peak -> (800, 15) -->
+<!-- Bottom bound: (800, 130) -> (300, 75) -> (0, 130) -->
+<path d="M 0 115 
+                       C 100 100, 200 45, 300 35 
+                       C 400 30, 500 65, 600 40 
+                       C 700 20, 750 15, 800 10
+                       L 800 140
+                       C 750 125, 700 110, 600 115
+                       C 500 110, 400 85, 300 75
+                       C 200 80, 100 125, 0 130 Z" fill="#006398" fill-opacity="0.12"></path>
+<!-- Primary Forecast Mean Curve (Solid Deep Teal) -->
+<path d="M 0 122 
+                       C 100 112, 200 60, 300 52 
+                       C 400 56, 500 88, 600 75 
+                       C 700 65, 750 60, 800 70" fill="none" stroke="#006398" stroke-width="3"></path>
+<!-- Peak indicator at T+18h (approx x=300) -->
+<circle cx="300" cy="52" fill="#ba1a1a" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<line stroke="#006398" stroke-dasharray="2 2" stroke-width="1.5" x1="300" x2="300" y1="52" y2="180"></line>
+</svg>
+<!-- Peak Callout Inspector Card at T+18h (x=300 / ~37%) -->
+<div class="absolute left-[34%] top-3 bg-surface-container-lowest shadow-lg rounded-lg p-space-sm border-l-4 border-l-error max-w-[240px] pointer-events-none">
+<div class="flex items-center justify-between gap-1">
+<span class="font-label-mono-sm text-label-mono-sm font-bold text-error uppercase">Peak Coincidence (T+18h)</span>
+<span class="font-label-mono-sm text-[10px] text-on-surface-variant">18:00 PKT</span>
+</div>
+<div class="mt-1 font-body-sm text-body-sm text-on-surface leading-tight">
+                Rain: <span class="font-semibold text-secondary">14mm/h</span> <span class="text-on-surface-variant text-[11px] font-label-mono-sm">(8-22mm/h)</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface leading-tight">
+                Heat Index: <span class="font-semibold text-tertiary-fixed-dim">44.1°C</span> with high convective downdraft.
+              </div>
+</div>
+<!-- X-Axis Timeline Markers -->
+<div class="absolute bottom-1 inset-x-0 px-2 flex justify-between font-label-mono-sm text-label-mono-sm text-on-surface-variant">
+<span>+0h (Now)</span>
+<span>+6h</span>
+<span>+12h</span>
+<span class="text-error font-bold">+18h (Peak)</span>
+<span>+24h</span>
+<span>+30h</span>
+<span>+36h (Spread ↑)</span>
+<span>+42h</span>
+<span>+48h</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-mono-sm text-label-mono-sm pt-1">
+<span class="truncate">Uncertainty expansion beyond T+36h reflects convective storm track divergence in GFS vs ECMWF.</span>
+<button class="text-secondary font-semibold hover:underline shrink-0 ml-2" type="button">Export Ensemble GRIB2</button>
+</div>
+</div>
+</div>
+<!-- Right Column (4 of 12 cols = ~30-33%): Ranked Priority Actions Panel -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm uppercase text-secondary font-semibold tracking-wider">Decision Support System</span>
+<span class="px-2 py-0.5 rounded-full bg-error text-on-error font-label-mono-sm text-label-mono-sm font-semibold">4 Actions Pinned</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">Ranked Priority Actions</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Algorithmic risk optimization based on population density, elevation, and drainage latency.</p>
+</div>
+<!-- Action Items Stack -->
+<div class="flex flex-col gap-space-sm">
+<!-- Item 1: Urgent Crimson -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-xs relative overflow-hidden transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-error text-on-error font-label-mono-sm text-label-mono-sm font-bold uppercase tracking-wider">
+                  #1 Urgent Intervention
+                </span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Score: 94.6</span>
+</div>
+<div class="font-title-md text-title-md text-on-surface font-semibold mt-1">
+                Activate Emergency Cooling Stations &amp; Mobile Water Bowsers
+              </div>
+<div class="flex items-center gap-1 font-label-mono-sm text-label-mono-sm text-secondary font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Lyari &amp; Orangi Town (Dense informal settlements)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+                Compound vulnerability: 44°C heat index + 70% humidity with high elderly population density and frequent 11kV feeder tripping.
+              </p>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<a class="text-secondary font-semibold hover:underline flex items-center gap-1" href="#">
+<span>View Evidence: Model #KHI-941</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] uppercase">PMD Alert #08</span>
+</div>
+</div>
+<!-- Item 2: High Orange -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-xs relative overflow-hidden transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-mono-sm text-label-mono-sm font-bold uppercase tracking-wider">
+                  #2 High Operational
+                </span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Score: 88.2</span>
+</div>
+<div class="font-title-md text-title-md text-on-surface font-semibold mt-1">
+                Pre-position De-watering Pumps along Gujjar Nullah &amp; Shaheed-e-Millat
+              </div>
+<div class="flex items-center gap-1 font-label-mono-sm text-label-mono-sm text-secondary font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Central District &amp; Korangi Causeway</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+                Predicted 35mm runoff within 3h exceeds local storm-drain carrying capacity by 140%, threatening vital hospital transit corridors.
+              </p>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<a class="text-secondary font-semibold hover:underline flex items-center gap-1" href="#">
+<span>View Evidence: Hydrology V2</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] uppercase">KMC Drainage</span>
+</div>
+</div>
+<!-- Item 3: Elevated Yellow -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-xs relative overflow-hidden transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-mono-sm text-label-mono-sm font-bold uppercase tracking-wider">
+                  #3 Elevated Caution
+                </span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Score: 76.4</span>
+</div>
+<div class="font-title-md text-title-md text-on-surface font-semibold mt-1">
+                Issue Fishermen Warning &amp; Kemari Harbor Coastal Surge Advisory
+              </div>
+<div class="flex items-center gap-1 font-label-mono-sm text-label-mono-sm text-secondary font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Kemari, Baba Bhit &amp; Manora Island</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+                Tidal swell estimated at 3.8m coincident with high rain band at 20:00 PKT. Risk of seawater intrusion into low-lying harbor wharves.
+              </p>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<a class="text-secondary font-semibold hover:underline flex items-center gap-1" href="#">
+<span>View Gauge: KPT Tide Station</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] uppercase">Marine Met</span>
+</div>
+</div>
+<!-- Item 4: Preventive Blue -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-xs relative overflow-hidden transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-mono-sm text-label-mono-sm font-bold uppercase tracking-wider">
+                  #4 Preventive Dispatch
+                </span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Score: 71.0</span>
+</div>
+<div class="font-title-md text-title-md text-on-surface font-semibold mt-1">
+                Restock ORS and Heatstroke IV Infusion Packs in 12 District Hospitals
+              </div>
+<div class="flex items-center gap-1 font-label-mono-sm text-label-mono-sm text-secondary font-medium">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Civil Hospital, Abbasi Shaheed &amp; JPMC</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+                Emergency inventory buffers below 48h surge demand. Surge expectation: 350-500 ambulatory presentations per emergency room.
+              </p>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<a class="text-secondary font-semibold hover:underline flex items-center gap-1" href="#">
+<span>View Evidence: Health Depot</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] uppercase">Supply Sync</span>
+</div>
+</div>
+</div>
+<!-- Quick Dispatch Actions Footer Bar -->
+<div class="mt-space-xs p-space-sm bg-surface-container rounded-lg flex flex-col gap-space-sm">
+<button class="w-full py-2.5 px-4 bg-primary text-on-primary rounded-lg font-title-md text-title-md hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[20px]">send_time_extension</span>
+<span>Broadcast Directives to KMC Cell</span>
+</button>
+<div class="flex items-center justify-between text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span>Automated SMS/Tetra Relay</span>
+<span class="text-secondary font-bold">18 Towns Subscribed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="fixed bottom-0 left-[260px] right-0 z-40 bg-surface-container-highest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-12 w-full px-space-lg flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-xs truncate"><span class="material-symbols-outlined text-error text-[18px] shrink-0">warning</span><span class="font-semibold text-on-surface shrink-0">OFFICIAL NOTICE:</span><span class="truncate">Information only, decision-support aid. Not professional or binding legal advice. In a life-threatening meteorological emergency contact Sindh PDMA (1736) or Rescue 1122 immediately.</span></div><div class="shrink-0 ml-space-md font-label-mono-sm text-label-mono-sm text-on-surface-variant">SINDH PDMA / KMC CELL v2.4</div></div></footer></div></body></html>
