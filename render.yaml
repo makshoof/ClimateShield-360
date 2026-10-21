@@ -11,6 +11,12 @@ services:
       - key: CLIMATESHIELD_DB
         value: /app/pipeline/data/processed/climateshield.duckdb
       - key: CLIMATESHIELD_AUTO_INGEST
-        value: "0"
+        value: "1"
+      - key: CLIMATESHIELD_INGEST_STALE_MINUTES
+        value: "50"
+      - key: CLIMATESHIELD_INGEST_CHECK_SECONDS
+        value: "180"
+      - key: PYTHONPATH
+        value: /app/pipeline
       - key: PYTHONUNBUFFERED
         value: "1"

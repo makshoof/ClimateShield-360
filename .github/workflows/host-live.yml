@@ -112,8 +112,10 @@ jobs:
       - name: Start API + SPA
         env:
           CLIMATESHIELD_DB: ${{ github.workspace }}/pipeline/data/processed/climateshield.duckdb
-          # Ingest already ran above; keep API read-only while serving.
-          CLIMATESHIELD_AUTO_INGEST: "0"
+          # Keep fetching Open-Meteo while the public host is up.
+          CLIMATESHIELD_AUTO_INGEST: "1"
+          CLIMATESHIELD_INGEST_STALE_MINUTES: "50"
+          CLIMATESHIELD_INGEST_CHECK_SECONDS: "180"
           PYTHONPATH: ${{ github.workspace }}/pipeline
         run: |
           cd backend
@@ -238,7 +240,31 @@ jobs:
           # Also publish docs/ to gh-pages for branded GitHub Pages URL
           git push origin HEAD:gh-pages --force
 
-      - name: Keep tunnel alive
+      - name: Keep tunnel alive with hourly ingest
+        env:
+          CLIMATESHIELD_DB: ${{ github.workspace }}/pipeline/data/processed/climateshield.duckdb
+          PYTHONPATH: ${{ github.workspace }}/pipeline
         run: |
-          echo "Serving ${PUBLIC_URL} for ~5.5 hours"
+          set -euo pipefail
+          echo "Serving ${PUBLIC_URL} for ~5.5 hours with hourly Open-Meteo refresh"
+          # Backup loop in case the in-process supervisor misses a cycle (DuckDB lock races).
+          (
+            END=$((SECONDS + 330 * 60))
+            while [ "$SECONDS" -lt "$END" ]; do
+              sleep 3600
+              echo "[ingest-loop] $(date -u +%Y-%m-%dT%H:%M:%SZ) starting hourly ingest"
+              (
+                cd "${{ github.workspace }}/pipeline"
+                python -m climateshield ingest-hourly --once
+              ) >> /tmp/ingest-loop.log 2>&1 || echo "[ingest-loop] ingest failed (will retry next hour)"
+              curl -sf http://127.0.0.1:8000/api/status | head -c 300 || true
+              echo
+            done
+          ) &
+          LOOP_PID=$!
           sleep 330m
+          kill "$LOOP_PID" 2>/dev/null || true
+          echo "---- ingest-loop tail ----"
+          tail -n 40 /tmp/ingest-loop.log || true
+          echo "---- api log tail ----"
+          tail -n 40 /tmp/api.log || true
