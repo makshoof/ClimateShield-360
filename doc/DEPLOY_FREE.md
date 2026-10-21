@@ -4,7 +4,11 @@
 
 Repo: [makshoof/ClimateShield-360](https://github.com/makshoof/ClimateShield-360)
 
-GitHub Actions workflow **Host ClimateShield-360** builds the SPA + API and publishes a public Cloudflare quick-tunnel URL. The current URL is written to the `live` branch (`live/URL.txt`) and set as the repo homepage. The job relaunches about every 5 hours (Actions max ~6h).
+**Branded links**
+- App tunnel (preferred): https://climateshield-360.loca.lt  
+- GitHub Pages entry: https://makshoof.github.io/ClimateShield-360/
+
+GitHub Actions workflow **Host ClimateShield-360** rebuilds the SPA + API, runs `ingest-hourly --once` so Overview shows live Open-Meteo hours, then publishes the branded tunnel. Current URL: `live/URL.txt`. Job relaunches about every 5 hours.
 
 Trigger manually: Actions → Host ClimateShield-360 → Run workflow.
 

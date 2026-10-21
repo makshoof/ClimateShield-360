@@ -1,6 +1,4 @@
-# Autonomous free public host — no Render/Fly/Railway API key required.
-# Runs the full API + SPA on GitHub Actions and exposes it via Cloudflare quick tunnel.
-# Relunches on a schedule so the URL stays available within Actions' ~6h job limit.
+# Autonomous free public host for ClimateShield-360 (branded tunnel + live hourly data).
 name: Host ClimateShield-360
 
 on:
@@ -12,6 +10,7 @@ on:
     paths:
       - "backend/**"
       - "frontend/**"
+      - "pipeline/**"
       - "pipeline/data/processed/climateshield.duckdb"
       - ".github/workflows/host-live.yml"
       - "Dockerfile"
@@ -42,7 +41,9 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-          cache-dependency-path: backend/requirements.txt
+          cache-dependency-path: |
+            backend/requirements.txt
+            pipeline/requirements.txt
 
       - name: Build frontend
         working-directory: frontend
@@ -52,81 +53,159 @@ jobs:
           npm ci
           npm run build
 
-      - name: Install backend
-        working-directory: backend
-        run: pip install -r requirements.txt
+      - name: Install backend + pipeline
+        run: |
+          pip install -r backend/requirements.txt
+          pip install -r pipeline/requirements.txt
+
+      - name: Refresh hourly warehouse before serve
+        env:
+          CLIMATESHIELD_DB: ${{ github.workspace }}/pipeline/data/processed/climateshield.duckdb
+          PYTHONPATH: ${{ github.workspace }}/pipeline
+        run: |
+          set -euo pipefail
+          echo "DB bytes: $(wc -c < pipeline/data/processed/climateshield.duckdb)"
+          python - <<'PY'
+          import duckdb, os
+          db = os.environ["CLIMATESHIELD_DB"]
+          con = duckdb.connect(db, read_only=True)
+          print("weather_rows", con.execute("select count(*) from weather_hourly").fetchone()[0])
+          print("run_rows", con.execute("select count(*) from run_status").fetchone()[0])
+          print("max_ts", con.execute("select max(timestamp_utc) from weather_hourly").fetchone()[0])
+          con.close()
+          PY
+          # Fetch latest Open-Meteo into the warehouse (write) before API opens read-only.
+          python -m climateshield ingest-hourly --once
+        working-directory: ${{ github.workspace }}/pipeline
 
       - name: Start API + SPA
         env:
           CLIMATESHIELD_DB: ${{ github.workspace }}/pipeline/data/processed/climateshield.duckdb
+          # Ingest already ran above; keep API read-only while serving.
           CLIMATESHIELD_AUTO_INGEST: "0"
+          PYTHONPATH: ${{ github.workspace }}/pipeline
         run: |
           cd backend
           nohup python -m uvicorn main:app --host 127.0.0.1 --port 8000 > /tmp/api.log 2>&1 &
           for i in $(seq 1 90); do
             if curl -sf http://127.0.0.1:8000/api/health >/dev/null; then
               echo "API healthy"
+              META=$(curl -sf http://127.0.0.1:8000/api/meta)
+              echo "$META" | head -c 500
+              echo
+              STATUS=$(curl -sf http://127.0.0.1:8000/api/status)
+              echo "$STATUS" | head -c 400
+              echo
               exit 0
             fi
             sleep 2
           done
           echo "API failed to start" >&2
-          tail -n 80 /tmp/api.log || true
+          tail -n 120 /tmp/api.log || true
           exit 1
 
-      - name: Install cloudflared
-        run: |
-          curl -fsSL -o ./cloudflared \
-            https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
-          chmod +x ./cloudflared
-          ./cloudflared --version
-
-      - name: Open public tunnel and publish URL
+      - name: Open ClimateShield-360 public tunnel
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          ./cloudflared tunnel --url http://127.0.0.1:8000 --no-autoupdate > /tmp/cf.log 2>&1 &
+          # Prefer branded localtunnel subdomain; fall back to Cloudflare quick tunnel.
+          npx --yes localtunnel --port 8000 --subdomain climateshield-360 > /tmp/lt.log 2>&1 &
+          LT_PID=$!
           URL=""
-          for i in $(seq 1 90); do
-            URL=$(grep -oE 'https://[a-zA-Z0-9-]+\.trycloudflare\.com' /tmp/cf.log | head -n1 || true)
-            if [ -n "$URL" ]; then
-              break
+          for i in $(seq 1 45); do
+            if grep -qiE 'climateshield-360\.loca\.lt|your url is:' /tmp/lt.log; then
+              URL=$(grep -oE 'https://[a-zA-Z0-9.-]+\.loca\.lt' /tmp/lt.log | head -n1 || true)
+              if [ -n "$URL" ]; then
+                break
+              fi
             fi
             sleep 2
           done
           if [ -z "$URL" ]; then
-            echo "Tunnel URL not found" >&2
-            cat /tmp/cf.log || true
+            echo "localtunnel branded subdomain unavailable — using Cloudflare"
+            kill "$LT_PID" 2>/dev/null || true
+            curl -fsSL -o ./cloudflared \
+              https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+            chmod +x ./cloudflared
+            ./cloudflared tunnel --url http://127.0.0.1:8000 --no-autoupdate > /tmp/cf.log 2>&1 &
+            for i in $(seq 1 90); do
+              URL=$(grep -oE 'https://[a-zA-Z0-9-]+\.trycloudflare\.com' /tmp/cf.log | head -n1 || true)
+              if [ -n "$URL" ]; then
+                break
+              fi
+              sleep 2
+            done
+          fi
+          if [ -z "$URL" ]; then
+            echo "No public tunnel URL" >&2
+            cat /tmp/lt.log /tmp/cf.log 2>/dev/null || true
             exit 1
           fi
           echo "PUBLIC_URL=$URL" >> "$GITHUB_ENV"
           echo "ClimateShield-360 live at $URL"
-          mkdir -p live
+          mkdir -p live docs
           printf '%s\n' "$URL" > live/URL.txt
-          printf '{"url":"%s","updated_at":"%s","service":"ClimateShield-360"}\n' \
+          printf '{"url":"%s","updated_at":"%s","service":"ClimateShield-360","branded_name":"ClimateShield-360"}\n' \
             "$URL" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > live/status.json
-          gh api -X PATCH "repos/${{ github.repository }}" -f homepage="$URL" || true
+          python - <<PY
+          from pathlib import Path
+          url = """${URL}"""
+          Path("docs/index.html").write_text(
+              f"""<!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="refresh" content="0;url={url}" />
+            <title>ClimateShield-360</title>
+            <link rel="canonical" href="{url}" />
+            <style>
+              body{{font-family:Georgia,serif;background:#071018;color:#E8F1F5;display:grid;place-items:center;min-height:100vh;margin:0}}
+              a{{color:#7DD3FC}}
+              main{{text-align:center;padding:2rem}}
+              h1{{font-size:clamp(2rem,6vw,3.5rem);letter-spacing:.02em;margin:0 0 .5rem}}
+            </style>
+          </head>
+          <body>
+            <main>
+              <h1>ClimateShield-360</h1>
+              <p>Opening the live command centre…</p>
+              <p><a href="{url}">{url}</a></p>
+            </main>
+            <script>location.replace({url!r});</script>
+          </body>
+          </html>
+          """,
+              encoding="utf-8",
+          )
+          PY
+          if echo "$URL" | grep -qi 'climateshield-360'; then
+            HOME_URL="$URL"
+          else
+            HOME_URL="https://makshoof.github.io/ClimateShield-360/"
+          fi
+          gh api -X PATCH "repos/${{ github.repository }}" -f homepage="$HOME_URL" || true
           {
             echo "### ClimateShield-360 is live"
             echo ""
-            echo "**URL:** $URL"
+            echo "**App:** $URL"
             echo ""
-            echo "SPA + API on the same origin. Free tunnel via Cloudflare; job refreshes ~every 5 hours."
+            echo "**Branded entry:** https://makshoof.github.io/ClimateShield-360/"
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Publish live branch
+      - name: Publish live + Pages entry
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin live 2>/dev/null || true
-          git add live/URL.txt live/status.json
+          git add live/URL.txt live/status.json docs/index.html
           if git diff --cached --quiet; then
             echo "No URL change"
           else
             git commit -m "chore: update ClimateShield-360 live URL"
           fi
           git push origin HEAD:live --force
+          # Also publish docs/ to gh-pages for branded GitHub Pages URL
+          git push origin HEAD:gh-pages --force
 
       - name: Keep tunnel alive
         run: |
