@@ -1,16 +1,20 @@
 # Free deploy — ClimateShield-360
 
-## Target URL (free subdomain)
+## Live now (no cloud API key)
+
+Repo: [makshoof/ClimateShield-360](https://github.com/makshoof/ClimateShield-360)
+
+GitHub Actions workflow **Host ClimateShield-360** builds the SPA + API and publishes a public Cloudflare quick-tunnel URL. The current URL is written to the `live` branch (`live/URL.txt`) and set as the repo homepage. The job relaunches about every 5 hours (Actions max ~6h).
+
+Trigger manually: Actions → Host ClimateShield-360 → Run workflow.
+
+## Optional: Render named subdomain
 
 **https://climateshield-360.onrender.com**
 
-Render’s free plan includes a named subdomain. A paid custom domain (e.g. `.com`) is not free; use this hostname as **ClimateShield-360**.
-
-## One-click (recommended)
-
 1. Sign up at [render.com](https://render.com) with GitHub (free).
 2. Open **Blueprints** → **New Blueprint Instance**.
-3. Select repo `Afzal-Iqbal/climateshield-360` (branch `main`).
+3. Select repo `makshoof/ClimateShield-360` (branch `main`).
 4. Apply `render.yaml` — service name is `climateshield-360`.
 5. Wait for the Docker build (~10–15 min first time).
 
