@@ -62,21 +62,28 @@ jobs:
         env:
           CLIMATESHIELD_DB: ${{ github.workspace }}/pipeline/data/processed/climateshield.duckdb
           PYTHONPATH: ${{ github.workspace }}/pipeline
+        working-directory: ${{ github.workspace }}/pipeline
         run: |
           set -euo pipefail
-          echo "DB bytes: $(wc -c < pipeline/data/processed/climateshield.duckdb)"
+          pip install -q pytz
+          DB="$CLIMATESHIELD_DB"
+          echo "DB bytes: $(wc -c < "$DB")"
           python - <<'PY'
           import duckdb, os
           db = os.environ["CLIMATESHIELD_DB"]
           con = duckdb.connect(db, read_only=True)
-          print("weather_rows", con.execute("select count(*) from weather_hourly").fetchone()[0])
-          print("run_rows", con.execute("select count(*) from run_status").fetchone()[0])
-          print("max_ts", con.execute("select max(timestamp_utc) from weather_hourly").fetchone()[0])
+          weather = con.execute("select count(*) from weather_hourly").fetchone()[0]
+          runs = con.execute("select count(*) from run_status").fetchone()[0]
+          max_ts = con.execute("select cast(max(timestamp_utc) as varchar) from weather_hourly").fetchone()[0]
+          print("weather_rows", weather)
+          print("run_rows", runs)
+          print("max_ts", max_ts)
           con.close()
+          if weather < 1:
+              raise SystemExit("weather_hourly is empty — cannot host live Overview")
           PY
-          # Fetch latest Open-Meteo into the warehouse (write) before API opens read-only.
-          python -m climateshield ingest-hourly --once
-        working-directory: ${{ github.workspace }}/pipeline
+          # Best-effort Open-Meteo refresh; baked warehouse already has hourly rows.
+          python -m climateshield ingest-hourly --once || echo "::warning::ingest-hourly failed; serving committed warehouse"
 
       - name: Start API + SPA
         env:
