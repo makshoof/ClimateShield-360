@@ -119,8 +119,22 @@ def run_ingest_once() -> int:
         _ingest_lock.release()
 
 
+def _startup_delay_seconds() -> float:
+    """Let the HTTP server pass health checks before heavy ingest (Render free RAM)."""
+    try:
+        return max(0.0, float(os.getenv("CLIMATESHIELD_INGEST_STARTUP_DELAY_SECONDS", "90")))
+    except ValueError:
+        return 90.0
+
+
 def _loop() -> None:
-    # Immediate catch-up after app start / laptop reopen.
+    delay = _startup_delay_seconds()
+    if delay > 0:
+        logger.info("Hourly supervisor waiting %.0fs before first ingest (health-check grace).", delay)
+        if _stop.wait(delay):
+            return
+
+    # Catch-up after grace period (and after laptop reopen locally).
     try:
         if _needs_ingest():
             run_ingest_once()

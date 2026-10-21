@@ -15,7 +15,10 @@ services:
         value: "50"
       - key: CLIMATESHIELD_INGEST_CHECK_SECONDS
         value: "180"
+      - key: CLIMATESHIELD_INGEST_STARTUP_DELAY_SECONDS
+        value: "120"
       - key: PYTHONPATH
         value: /app/pipeline
       - key: PYTHONUNBUFFERED
         value: "1"
+
